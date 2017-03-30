@@ -47,7 +47,7 @@ getHomeR = do
         insert_ $ Person "Bob"
     respondSourceDB typePlain $ selectSource [] [Asc PersonName] $= awaitForever toBuilder
   where
-    toBuilder (Entity _ (Person name)) = do
+    toBuilder (Entity _ (Person name) _) = do
         yield $ Chunk $ fromText name
         yield $ Chunk $ fromText "\n"
         yield Flush

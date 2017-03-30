@@ -13,6 +13,14 @@ packages:
   - ./yesod
   - ./yesod-eventsource
   - ./yesod-websockets
+  - location:
+      git: git@github.com:whittle/persistent.git
+      commit: 54357f7803631fbe8c1fd538eadd3d04696a6190
+    extra-dep: true
+    subdirs:
+      - persistent
+      - persistent-mysql
+      - persistent-template
 
 # Needed for LTS 2
 extra-deps:

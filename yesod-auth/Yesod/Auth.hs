@@ -166,7 +166,7 @@ class (Yesod master, PathPiece (AuthId master), RenderMessage master FormMessage
     -- >         when (isJust ma) $
     -- >             lift $ redirect HomeR   -- or any other Handler code you want
     -- >         defaultLoginHandler
-    -- 
+    --
     loginHandler :: HandlerT Auth (HandlerT master IO) Html
     loginHandler = defaultLoginHandler
 
@@ -452,14 +452,14 @@ handlePluginR plugin pieces = do
 --
 -- Since 1.1.0
 maybeAuth :: ( YesodAuthPersist master
-             , val ~ AuthEntity master
+             , Entity val ~ AuthEntity master
              , Key val ~ AuthId master
              , PersistEntity val
              , Typeable val
              ) => HandlerT master IO (Maybe (Entity val))
 maybeAuth = runMaybeT $ do
-    (aid, ae) <- MaybeT maybeAuthPair
-    return $ Entity aid ae
+    (_, ae) <- MaybeT maybeAuthPair
+    return ae
 
 -- | Similar to 'maybeAuth', but doesn’t assume that you are using a
 -- Persistent database.
@@ -535,7 +535,7 @@ requireAuthId = maybeAuthId >>= maybe handleAuthLack return
 --
 -- Since 1.1.0
 requireAuth :: ( YesodAuthPersist master
-               , val ~ AuthEntity master
+               , Entity val ~ AuthEntity master
                , Key val ~ AuthId master
                , PersistEntity val
                , Typeable val
